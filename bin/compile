@@ -1,15 +1,15 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 
-echo "-----> Installing Ghostscript 9.53.3"
+echo "-----> Installing Ghostscript 9.54.0"
 
 BUILD_DIR=$1
-PACKAGE="https://s3.amazonaws.com/tgl.public/buildpacks/ghostscript/ghostscript-9.53.3-linux-x86_64.tgz"
-BINARY="ghostscript-9.53.3-linux-x86_64/gs-9533-linux-x86_64"
+PACKAGE="https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs9540/ghostscript-9.54.0-linux-x86_64.tgz"
+BINARY="ghostscript-9.54.0-linux-x86_64/gs-9540-linux-x86_64"
 LOCATION="$BUILD_DIR/vendor/gs/bin"
 
 mkdir -p $LOCATION
-curl $PACKAGE -s -o - | tar xzf - -C $LOCATION
+curl $PACKAGE -L -s -o - | tar xzf - -C $LOCATION
 mv $LOCATION/$BINARY $LOCATION/gs
 
 echo "-----> Building runtime environment for Ghostscript"

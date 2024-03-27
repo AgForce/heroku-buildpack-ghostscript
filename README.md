@@ -1,6 +1,6 @@
 # Heroku Buildpack for Ghostscript
 
-Currently installs Ghostscript 9.53.3 on Heroku.
+Currently installs Ghostscript 9.54.0 on Heroku.
 
 ## Install
 

@@ -12,7 +12,7 @@ Currently installs Ghostscript 9.54.0 on Heroku.
     $ cd /path/to/your-app
     $ cat .buildpacks
     https://github.com/heroku/heroku-buildpack-ruby.git
-    https://github.com/bvirlet/heroku-buildpack-ghostscript.git
+    https://github.com/AgForce/heroku-buildpack-ghostscript.git
 
     # Push changes to deploy
     $ git push

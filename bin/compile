@@ -16,25 +16,19 @@ curl -L $PACKAGE | tar xz -C $LOCATION
 # Wechsle ins Verzeichnis des entpackten Quellcodes
 cd $LOCATION/ghostscript-10.04.0
 
-# Konfiguriere und kompiliere Ghostscript
+# Konfiguriere Ghostscript, um es im Build-Verzeichnis zu installieren
 echo "-----> Configuring Ghostscript"
-./configure
+./configure --prefix=$LOCATION
 
+# Kompiliere Ghostscript
 echo "-----> Compiling Ghostscript"
 make
 
-# Installiere die kompilierte Binärdatei ins Build-Verzeichnis
+# Installiere Ghostscript ins Build-Verzeichnis
 echo "-----> Installing Ghostscript"
 make install
 
-# Verschiebe die Ghostscript-Binärdatei an den gewünschten Ort
-mkdir -p $LOCATION/bin
-mv $LOCATION/ghostscript-10.04.0/obj/gs $LOCATION/bin/gs
-
-echo "-----> Building runtime environment for Ghostscript"
-
-# Füge Ghostscript dem PATH hinzu
+# Setze die Ghostscript-Binärdatei in den PATH
+echo "-----> Setting up Ghostscript runtime"
 mkdir -p $BUILD_DIR/.profile.d
 echo "export PATH=\"\$HOME/vendor/gs/bin:\$PATH\"" > $BUILD_DIR/.profile.d/ghostscript.sh
-
-echo "-----> Ghostscript installation complete"

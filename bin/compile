@@ -5,14 +5,36 @@ echo "-----> Installing Ghostscript 10.04.0"
 
 BUILD_DIR=$1
 PACKAGE="https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10040/ghostscript-10.04.0.tar.gz"
-BINARY="ghostscript-10.04.0-linux-x86_64/gs-10040-linux-x86_64"
-LOCATION="$BUILD_DIR/vendor/gs/bin"
+LOCATION="$BUILD_DIR/vendor/gs"
 
+# Erstelle das Zielverzeichnis
 mkdir -p $LOCATION
-curl $PACKAGE -L -s -o - | tar xzf - -C $LOCATION
-mv $LOCATION/$BINARY $LOCATION/gs
+
+# Lade das Ghostscript-Paket herunter und entpacke es
+curl -L $PACKAGE | tar xz -C $LOCATION
+
+# Wechsle ins Verzeichnis des entpackten Quellcodes
+cd $LOCATION/ghostscript-10.04.0
+
+# Konfiguriere und kompiliere Ghostscript
+echo "-----> Configuring Ghostscript"
+./configure
+
+echo "-----> Compiling Ghostscript"
+make
+
+# Installiere die kompilierte Binärdatei ins Build-Verzeichnis
+echo "-----> Installing Ghostscript"
+make install
+
+# Verschiebe die Ghostscript-Binärdatei an den gewünschten Ort
+mkdir -p $LOCATION/bin
+mv $LOCATION/ghostscript-10.04.0/obj/gs $LOCATION/bin/gs
 
 echo "-----> Building runtime environment for Ghostscript"
 
+# Füge Ghostscript dem PATH hinzu
 mkdir -p $BUILD_DIR/.profile.d
 echo "export PATH=\"\$HOME/vendor/gs/bin:\$PATH\"" > $BUILD_DIR/.profile.d/ghostscript.sh
+
+echo "-----> Ghostscript installation complete"

@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 
-echo "-----> Installing Ghostscript 9.54.0"
+echo "-----> Installing Ghostscript 10.04.0"
 
 BUILD_DIR=$1
-PACKAGE="https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs9540/ghostscript-9.54.0-linux-x86_64.tgz"
-BINARY="ghostscript-9.54.0-linux-x86_64/gs-9540-linux-x86_64"
+PACKAGE="https://github.com/ArtifexSoftware/ghostpdl-downloads/releases/download/gs10040/ghostscript-10.04.0.tar.gz"
+BINARY="ghostscript-10.04.0-linux-x86_64/gs-10040-linux-x86_64"
 LOCATION="$BUILD_DIR/vendor/gs/bin"
 
 mkdir -p $LOCATION
